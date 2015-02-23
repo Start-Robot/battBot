@@ -1,9 +1,21 @@
 /* CODIGO EMPUJAR OBSTACULOS FUERA DEL CIRCULO*/
 //------------------------------------------------------
+/* Bibliografa:*/
+/* blog TR3SDLAND http://www.tr3sdland.com/2013/04/robot-miniskybot-2-como-siguelineas-y-detector-de-obstaculos/ 
+Autor: Pablo 18/05/2013*/
+// LineFinder http://www.seeedstudio.com/wiki/Grove_-_Line_Finder
+// Adaptacin: Germn Souto Fernndez http://www.start-robot.com/index.html
 //------------------------------------------------------
 
 #include <Servo.h> // Librera del servo
 #include <Ultrasonic.h> // Librera del Ultrasonido
+
+#define derechoParada 1450
+#define izquierdoParada 1390
+#define derechoAdelante 2000
+#define izquierdoAdelante 1000
+#define derechoAtras 1000
+#define izquierdoAtras 2000
 
 // Declaramos Variables
 int ir_derecha; 
@@ -37,7 +49,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  digitalWrite(11,LOW);
+  /*digitalWrite(11,LOW);
   delayMicroseconds(5);
   digitalWrite(11,HIGH);
   delayMicroseconds(10);
@@ -47,7 +59,7 @@ void loop() {
   
   Serial.println("Distancia ");
   Serial.println(distancia);
-  Serial.println(" cm");
+  Serial.println(" cm");*/
   
   /* El servo al modificarlo indicamos que esta en posición 90º, si le diecimos
   que se coloque en una posición mayor, por ejemplo 180º, girará de forma
@@ -55,22 +67,21 @@ void loop() {
   posición inferior, por ejemplo 0º, girará de forma continua en el otro sentido.
   Si le indicamos 90º el servo se parará */
   
-  if (ultrasonic.Ranging(CM)<50){
-    servo_6.write(0);
-    servo_9.write(180);
+  if (ultrasonic.Ranging(CM) <20){
+    servo_6.writeMicroseconds(izquierdoAdelante);
+    servo_9.writeMicroseconds(derechoAdelante);
   }else{
-    servo_6.write(0);
-    servo_9.write(90);
+    servo_6.writeMicroseconds(izquierdoParada);
+    servo_9.writeMicroseconds(derechoAdelante);
   }
   
-  /*
   ir_derecha = digitalRead(3);
   ir_izquierda = digitalRead(2);
   
   if (ir_derecha == Negro || ir_izquierda == Negro){
-    servo_6.write(180);
-    servo_9.write(0);
+    servo_6.write(izquierdoAtras);
+    servo_9.write(derechoAtras);
     delay(1000);
-  }*/
+  }
 
 }
