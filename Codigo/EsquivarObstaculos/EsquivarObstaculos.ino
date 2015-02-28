@@ -27,8 +27,8 @@ int Blanco;
 Servo servo_6; // Servo izquierdo
 Servo servo_9; // Servo derecho
 
-long distancia;
-long tiempo;
+//long distancia;
+//long tiempo;
 
 Ultrasonic ultrasonic(11,10); // (Trig PIN, Echo PIN) ejemplo (4,A0);
 
@@ -43,7 +43,7 @@ void setup() {
   servo_6.attach(6); // Conexion servo izquierdo
   servo_9.attach(9); // Conexion servo derecho
   
-  Serial.begin(9600); // Incializada la comunicacion serial
+  //Serial.begin(9600); // Incializada la comunicacion serial
 
 }
 
@@ -79,8 +79,8 @@ void loop() {
   ir_izquierda = digitalRead(2);
   
   if (ir_derecha == Negro || ir_izquierda == Negro){
-    servo_6.write(izquierdoAtras);
-    servo_9.write(derechoAtras);
+    servo_6.writeMicroseconds(izquierdoAtras);
+    servo_9.writeMicroseconds(derechoAtras);
     delay(1000);
   }
 
